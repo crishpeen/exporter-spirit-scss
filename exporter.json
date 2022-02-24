@@ -5,7 +5,7 @@
     "author": "Jan Kryspin",
     "organization": "crishpeen",
     "source_dir": "src",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "usesBrands": true,
     "config": {
         "sources": "sources.json",
@@ -29,8 +29,7 @@
                 "default": 16,
                 "type": "number",
                 "label": "Default project font-size in px",
-                "description": "Used for calculation to rem",
-                "category": "Config"
+                "description": "Used for calculation to rem"
             }
         ]
     }
