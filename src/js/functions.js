@@ -154,11 +154,10 @@ Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false) {
     vars.push(`$${name}: ${value} !default;`);
   });
 
-
   const varsPrint = vars.join('\n');
 
   const typesPrint = tokens.length === 0 || tokens[0].tokenType === 'Border' ? '' : printTypes(types, tokens[0].tokenType === 'Color');
-  return `${varsPrint}\n${typesPrint}`;
+  return (`${varsPrint}\n${typesPrint}`).trim();
 });
 
 Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontSize) {
@@ -182,17 +181,17 @@ Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontS
     const letterSpacing = printUnit(token.value.letterSpacing.measure, token.value.letterSpacing.unit);
     const paragraphIndent = printUnit(token.value.paragraphIndent.measure, token.value.paragraphIndent.unit);
     vars.push(`$${name}: (
-  font-family: '${token.value.font.family}${fallback}',
-  font-size: ${fontSize},
-  font-style: ${fontStyle},
-  font-weight: ${getWeight(fontWeight)},
-  line-height: ${lineHeight},
-  letter-spacing: ${letterSpacing},
-  text-decoration: ${token.value.textDecoration.toLowerCase()},
-  text-indent: ${paragraphIndent},
-  text-transform: ${token.value.textCase === 'Original' ? 'none' : token.value.textCase.toLowerCase()},
+    font-family: '${token.value.font.family}${fallback}',
+    font-size: ${fontSize},
+    font-style: ${fontStyle},
+    font-weight: ${getWeight(fontWeight)},
+    line-height: ${lineHeight},
+    letter-spacing: ${letterSpacing},
+    text-decoration: ${token.value.textDecoration.toLowerCase()},
+    text-indent: ${paragraphIndent},
+    text-transform: ${token.value.textCase === 'Original' ? 'none' : token.value.textCase.toLowerCase()},
 ) !default;`);
   });
   
-  return vars.join('\n\n');
+  return vars.join('\n\n').trim();
 });

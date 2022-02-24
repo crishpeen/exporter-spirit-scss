@@ -1,1 +1,2 @@
+// Generated Measures from Supernova. Do not edit manually.
 {{ generateSimple(ds.tokensByType("Measure", ds.currentBrand().id), true) }}

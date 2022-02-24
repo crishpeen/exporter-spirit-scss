@@ -1,1 +1,2 @@
+// Generated Gradients from Supernova. Do not edit manually.
 {{ generateSimple(ds.tokensByType("Gradient", ds.currentBrand().id)) }}

@@ -1,1 +1,2 @@
+// Generated Colors from Supernova. Do not edit manually.
 {{ generateSimple(ds.tokensByType("Color", ds.currentBrand().id)) }}

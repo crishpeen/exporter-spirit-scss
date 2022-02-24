@@ -1,1 +1,2 @@
+// Generated Borders from Supernova. Do not edit manually.
 {{ generateSimple(ds.tokensByType("Border", ds.currentBrand().id)) }}
