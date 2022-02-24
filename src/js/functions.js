@@ -209,8 +209,8 @@ Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontS
     text-decoration: ${token.value.textDecoration.toLowerCase()},
     text-indent: ${paragraphIndent},
     text-transform: ${token.value.textCase === 'Original' ? 'none' : token.value.textCase.toLowerCase()},
-) !default;`);
+) !default;\n`);
   });
   
-  return vars.join('\n\n').trim();
+  return vars.join('\n');
 });
