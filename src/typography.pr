@@ -1,0 +1,2 @@
+{[ let defaultFontSize = exportConfiguration().defaultFontSize /]}
+{{ generateTypography(ds.tokensByType("Typography", ds.currentBrand().id), defaultFontSize) }}

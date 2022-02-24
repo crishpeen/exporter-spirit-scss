@@ -1,0 +1,1 @@
+{{ generateSimple(ds.tokensByType("Border", ds.currentBrand().id)) }}

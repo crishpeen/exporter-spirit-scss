@@ -1,0 +1,1 @@
+{{ generateSimple(ds.tokensByType("GenericToken", ds.currentBrand().id)) }}
