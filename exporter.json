@@ -30,7 +30,7 @@
                 "type": "number",
                 "label": "Default project font-size in px",
                 "description": "Used for calculation to rem",
-                "category": ""
+                "category": "Advanced"
             },
             {
                 "key": "advancedCustomizationCustomFonts",
