@@ -1,2 +1,2 @@
-# Exporter-Example
-Example exporter for Supernova DSM
+# Exporter Spirit SCSS
+Spirit SCSS Exporter
