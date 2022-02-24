@@ -5,7 +5,7 @@
     "author": "Jan Kryspin",
     "organization": "crishpeen",
     "source_dir": "src",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "usesBrands": true,
     "config": {
         "sources": "sources.json",
@@ -29,7 +29,18 @@
                 "default": 16,
                 "type": "number",
                 "label": "Default project font-size in px",
-                "description": "Used for calculation to rem"
+                "description": "Used for calculation to rem",
+                "category": ""
+            },
+            {
+                "key": "advancedCustomizationCustomFonts",
+                "type": "string",
+                "label": "Custom Font - Header",
+                "description": "Fonts you want loaded into your site. You can load multiple fonts at the same time. Icon fonts are also supported.",
+                "category": "Advanced",
+                "default": "<link href=\"https:\/\/fonts.googleapis.com\/css2?family=Inter:wght@400;500;700&display=swap\" rel=\"stylesheet\">",
+                "isMultiline": true,
+                "inputType": "code"
             }
         ]
     }
