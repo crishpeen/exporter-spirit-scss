@@ -27,11 +27,27 @@ function plural(name) {
   return `${name}s`;
 }
 
+function formatColor(color) {
+  const colorParts = color.match(/.{1,2}/g);
+  let shortHex = true;
+  colorParts.map((part) => {
+    if (shortHex) {
+      shortHex = /^(.)\1+$/.test(part);
+    }
+  });
+
+  if (shortHex) {
+    return `${color.substring(0, 1)}${color.substring(2, 3)}${color.substring(4, 5)}`;
+  }
+
+  return color;
+}
+
 function getColor(color) {
   if (color.a < 255) {
     return `#${color.hex}`;
   } else {
-    return `#${color.hex.substring(0, 6)}`;
+    return `#${formatColor(color.hex.substring(0, 6))}`;
   }
 }
 
@@ -92,7 +108,7 @@ function generateVars(list, name, type) {
   return result;
 }
 
-Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false) {
+Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false, sortByValue = false) {
   tokens.sort((a, b) => {
     if (sortByNum) {
       const aNumMatch = a.name.match(/\d+$/);
@@ -101,6 +117,9 @@ Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false) {
       if (aNumMatch && bNumMatch) {
         return aNumMatch[0] - bNumMatch[0];
       }
+    }
+    if (sortByValue) {
+      return +a.value.text - +b.value.text;
     }
     let aCompare = a.name.toLowerCase();
     let bCompare = b.name.toLowerCase();

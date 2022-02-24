@@ -1,2 +1,2 @@
 // Generated Generic Tokens (Other) from Supernova. Do not edit manually.
-{{ generateSimple(ds.tokensByType("GenericToken", ds.currentBrand().id)) }}
+{{ generateSimple(ds.tokensByType("GenericToken", ds.currentBrand().id), false, true) }}
