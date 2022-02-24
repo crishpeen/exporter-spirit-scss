@@ -158,7 +158,7 @@ Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false) {
   const varsPrint = vars.join('\n');
 
   const typesPrint = tokens.length === 0 || tokens[0].tokenType === 'Border' ? '' : printTypes(types, tokens[0].tokenType === 'Color');
-  return `${JSON.stringify(Pulsar)}\n\n\n${varsPrint}\n${typesPrint}`;
+  return `${varsPrint}\n${typesPrint}`;
 });
 
 Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontSize) {
