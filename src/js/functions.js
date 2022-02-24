@@ -176,7 +176,7 @@ Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false, so
   const varsPrint = vars.join('\n');
 
   const typesPrint = tokens.length === 0 || tokens[0].tokenType === 'Border' ? '' : printTypes(types, tokens[0].tokenType === 'Color');
-  return (`${varsPrint}\n${typesPrint}`).trim();
+  return `${varsPrint}\n${typesPrint}`;
 });
 
 Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontSize) {
