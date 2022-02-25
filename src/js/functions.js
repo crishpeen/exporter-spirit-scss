@@ -224,7 +224,7 @@ Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontS
     const letterSpacing = printUnit(token.value.letterSpacing.measure, token.value.letterSpacing.unit);
     const paragraphIndent = printUnit(token.value.paragraphIndent.measure, token.value.paragraphIndent.unit);
     vars.push(`$${name}: (
-    font-family: '${token.value.font.family}'${fallback},
+    font-family: "'${token.value.font.family}'${fallback}",
     font-size: ${fontSize},
     font-style: ${fontStyle},
     font-weight: ${getWeight(fontWeight)},
