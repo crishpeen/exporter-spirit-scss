@@ -27,6 +27,15 @@ function plural(name) {
   return `${name}s`;
 }
 
+function singular(name) {
+  if (name.slice(-1) === 's') {
+    return name.replace(/.$/, '');
+  }
+  return name;
+}
+
+
+
 function formatColor(color) {
   const colorParts = color.match(/.{1,2}/g);
   let shortHex = true;
@@ -108,7 +117,11 @@ function generateVars(list, name, type) {
   return result;
 }
 
-Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false, sortByValue = false) {
+function cleanName(name) {
+  return name.replace(/\s/g, '-').replace(/\//g, '-').replace(/\d+-/g, '').replace(/--+/g, '-').toLowerCase();
+}
+
+Pulsar.registerFunction("generateSimple", function(tokens, groups = {}, sortByNum = false, sortByValue = false) {
   tokens.sort((a, b) => {
     if (sortByNum) {
       const aNumMatch = a.name.match(/\d+$/);
@@ -132,15 +145,25 @@ Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false, so
   const vars = [];
   let types = {};
   tokens.map((token) => {
-    let name = token.name.replace(/\s/g, '-').toLowerCase();
+    let name = cleanName(token.name)
     if (token.origin) {
-      name = token.origin.name.replace(/\s/g, '-').replace(/\//g, '-').replace(/\d+-/g, '').replace(/--+/g, '-').toLowerCase();
+      name = cleanName(token.origin.name)
+    }
+    let groupName = '';
+    if (groups.length > 0) {
+      groups.map((group) => {
+        if (Object.values(group.tokenIds).indexOf(token.id) > -1 && group.isRoot == false) {
+          groupName = singular(cleanName(group.name));
+        }
+      });
     }
     const split = name.split('-');
-    if (types[split[0]] && types[split[0]].length > 0) {
-      types[split[0]].push(name.replace(`${split[0]}-`,''));
+    const typeName = groupName === '' ? split[0] : groupName;
+    const tokenNameWithouType = groupName === '' ? name.replace(`${split[0]}-`,'') : name.replace(`${groupName}-`,'');
+    if (types[typeName] && types[typeName].length > 0) {
+      types[typeName].push(tokenNameWithouType);
     } else {
-      types[split[0]] = [name.replace(`${split[0]}-`,'')]
+      types[typeName] = [tokenNameWithouType];
     }
     let value = '';
     if (token.tokenType === 'Color') {
@@ -181,7 +204,8 @@ Pulsar.registerFunction("generateSimple", function(tokens, sortByNum = false, so
 
 Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontSize) {
   const vars = [];
-  const fallback = '';
+  // todo
+  const fallback = ', sans-serif';
   tokens.map((token) => {   
     let name = token.name.replace(/\s/g, '-').toLowerCase();
     if (token.origin) {
@@ -200,7 +224,7 @@ Pulsar.registerFunction("generateTypography", function(tokens = [], defaultFontS
     const letterSpacing = printUnit(token.value.letterSpacing.measure, token.value.letterSpacing.unit);
     const paragraphIndent = printUnit(token.value.paragraphIndent.measure, token.value.paragraphIndent.unit);
     vars.push(`$${name}: (
-    font-family: '${token.value.font.family}${fallback}',
+    font-family: '${token.value.font.family}'${fallback},
     font-size: ${fontSize},
     font-style: ${fontStyle},
     font-weight: ${getWeight(fontWeight)},
